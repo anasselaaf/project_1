@@ -1,0 +1,13 @@
+# syntax = docker/docker_file
+FROM ringcentral/jdk
+WORKDIR /Mcommerce/dependencies
+COPY src ./src
+COPY .mvn ./.mvn
+COPY pom.xml ./
+COPY mvnw ./
+RUN chmod +x ./mvnw 
+RUN ./mvnw dependency:go-offline 
+CMD ["./mvnw","spring-boot:run"]
+
+
+
